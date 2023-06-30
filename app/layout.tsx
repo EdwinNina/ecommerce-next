@@ -1,7 +1,11 @@
+'use client'
+import { CustomProvider } from '@/store/provider'
 import './globals.css'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Montserrat } from 'next/font/google'
+import { Carrito } from '@/components/Carrito'
+import { ThemeProvider } from "@material-tailwind/react";
+import Example from '@/components/ui/Navbar'
+const font = Montserrat({ weight: '400', subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,8 +18,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={font.className}>
+      <CustomProvider>
+        <ThemeProvider>
+          <body className='bg-gray-100'>
+            <Example />
+            <Carrito/>
+            <main className='px-10 py-10'>
+              {children}
+            </main>
+          </body>
+        </ThemeProvider>
+      </CustomProvider>
     </html>
   )
 }
